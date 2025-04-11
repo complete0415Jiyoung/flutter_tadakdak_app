@@ -1,7 +1,7 @@
 # 📱 모바일 타자연습 게임
 
-<img src="https://img.shields.io/badge/Project-TypeScript-blue" />
-<img src="https://img.shields.io/badge/Platform-React%20Native-green" />
+<img src="https://img.shields.io/badge/Project-Dart-blue" />
+<img src="https://img.shields.io/badge/Platform-Flutter-green" />
 <img src="https://img.shields.io/badge/Duration-2%20weeks-lightgrey" />
 
 ## 🎮 프로젝트 소개

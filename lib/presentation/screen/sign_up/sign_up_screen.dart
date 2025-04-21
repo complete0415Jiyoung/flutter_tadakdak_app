@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:tadaktak_app/core/routing/routes.dart';
 import 'package:tadaktak_app/core/styles/app_text_styles.dart';
 import 'package:tadaktak_app/core/styles/color_styles.dart';
 import 'package:tadaktak_app/presentation/component/buttons.dart';
+import 'package:tadaktak_app/presentation/preview_screen/preview_main_screen.dart';
 import 'package:tadaktak_app/presentation/component/logo.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -15,7 +14,6 @@ class SplashScreen extends StatelessWidget {
     final width = size.width;
 
     return Scaffold(
-      backgroundColor: ColorStyles.purple100, // 보라색 배경
       body: Stack(
         children: [
           Positioned(
@@ -84,10 +82,24 @@ class SplashScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Buttons(
+                              text: '카카오톡 로그인',
+                              btnColor: ColorStyles.yellow100,
+                              textColor: ColorStyles.gray900,
+                              onPressed: () {
+                                print('카카오 로그인 진행');
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            Buttons(
                               text: '시작하기',
                               btnColor: ColorStyles.purple900,
                               onPressed: () {
-                                context.push(Routes.signIn);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PreviewMain(),
+                                  ),
+                                );
                               },
                             ),
                           ],

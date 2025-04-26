@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tadaktak_app/presentation/screen/long_sentence/action/long_sentence_action.dart';
+import 'package:tadaktak_app/presentation/screen/long_sentence/state/long_sentence_state.dart';
 
 class LongSentenceScreen extends StatefulWidget {
-  const LongSentenceScreen({super.key});
+  final LongSentenceState state;
+  final void Function(LongSentenceAction action) onAction;
+
+  const LongSentenceScreen({
+    super.key,
+    required this.state,
+    required this.onAction,
+  });
 
   @override
   State<LongSentenceScreen> createState() => _LongSentenceScreenState();

@@ -87,7 +87,7 @@ class SplashScreen extends StatelessWidget {
                               text: '시작하기',
                               btnColor: ColorStyles.purple900,
                               onPressed: () {
-                                context.push(Routes.signIn);
+                                context.push(Routes.home);
                               },
                             ),
                           ],

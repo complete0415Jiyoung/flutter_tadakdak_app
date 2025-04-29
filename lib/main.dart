@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart'; // <-- 추가!
 import 'package:tadaktak_app/core/routing/router.dart';
 import 'package:tadaktak_app/core/styles/color_styles.dart';
 
 void main() async {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized(); // SystemChrome 사용 이전에 초기화
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp, // 세로 모드로 제한
+  ]);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

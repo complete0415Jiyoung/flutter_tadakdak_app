@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/services.dart'; // <-- 추가!
-import 'package:tadaktak_app/core/routing/router.dart';
+import 'package:flutter/services.dart';
+import 'package:tadaktak_app/core/routing/app_router.dart';
 import 'package:tadaktak_app/core/styles/color_styles.dart';
 
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // SystemChrome 사용 이전에 초기화
+  WidgetsFlutterBinding.ensureInitialized();
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp, // 세로 모드로 제한
   ]);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

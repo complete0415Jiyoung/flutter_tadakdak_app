@@ -44,6 +44,26 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Ignore entire iOS
-ios/
-androisd/
+# Firebase 설정 파일
+google-services.json
+firebase_options.dart
+GoogleService-Info.plist
+.firebaserc
+firebase.json
+
+# Firebase 로컬 설정
+.firebase/
+
+# Android 관련
+**/android/key.properties
+**/android/app/google-services.json
+/android/
+
+# iOS 관련
+**/ios/Runner/GoogleService-Info.plist
+**/ios/firebase_app_id_file.json
+/ios/
+
+# 로컬 환경 변수 파일
+.env
+.env.local

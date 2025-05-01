@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518414272878",
+    "project_id": "tadadak-2b531",
+    "storage_bucket": "tadadak-2b531.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518414272878:android:01685a1b93fdf82215197f",
+        "android_client_info": {
+          "package_name": "com.example.tadaktak_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZc2T3vjp64E6JDUPrhzG9FOCX540tccU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tadaktak_app/core/styles/app_text_styles.dart';
 import 'package:tadaktak_app/core/styles/color_styles.dart';
 import 'package:tadaktak_app/presentation/component/coustom_app_bar.dart';
 import 'package:tadaktak_app/presentation/component/game_timer.dart';

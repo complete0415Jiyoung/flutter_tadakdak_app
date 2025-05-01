@@ -13,6 +13,7 @@ class Buttons extends StatefulWidget {
   final bool isPressed;
   final Color? btnColor;
   final Color? textColor;
+  final bool isLoading; // 추가된 isLoading 매개변수
 
   const Buttons({
     super.key,
@@ -24,6 +25,7 @@ class Buttons extends StatefulWidget {
     this.isPressed = false,
     this.btnColor = ColorStyles.purple300,
     this.textColor = ColorStyles.gray50,
+    this.isLoading = false, // 기본값 false
   });
 
   _ButtonStyleInfo _getStyle(ButtonSize size, Color textColor) {
@@ -79,30 +81,38 @@ class _ButtonsState extends State<Buttons> {
     }
 
     final Color backgroundColor =
-        widget.isDisabled
+        widget.isDisabled ||
+                widget
+                    .isLoading // isLoading 상태도 비활성화 배경색 적용
             ? ColorStyles.gray4
             : _isPressed
             ? ColorStyles.gray4
             : widget.btnColor ?? ColorStyles.purple100;
 
     return GestureDetector(
-      onTap: widget.isDisabled ? null : widget.onPressed,
+      onTap:
+          (widget.isDisabled || widget.isLoading) // isLoading 중에는 탭 비활성화
+              ? null
+              : widget.onPressed,
       onTapDown: (_) {
-        if (!widget.isDisabled) {
+        if (!widget.isDisabled && !widget.isLoading) {
+          // isLoading 체크 추가
           setState(() {
             _isPressed = true;
           });
         }
       },
       onTapUp: (_) {
-        if (!widget.isDisabled) {
+        if (!widget.isDisabled && !widget.isLoading) {
+          // isLoading 체크 추가
           setState(() {
             _isPressed = false;
           });
         }
       },
       onTapCancel: () {
-        if (!widget.isDisabled) {
+        if (!widget.isDisabled && !widget.isLoading) {
+          // isLoading 체크 추가
           setState(() {
             _isPressed = false;
           });
@@ -120,15 +130,27 @@ class _ButtonsState extends State<Buttons> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (showIcon && widget.icon != null) ...[
-              Icon(widget.icon, color: widget.textColor, size: 20),
-              const SizedBox(width: 11),
+            // isLoading 상태일 때는 로딩 인디케이터 표시, 아닐 때는 기존 내용 표시
+            if (widget.isLoading)
+              SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(widget.textColor!),
+                ),
+              )
+            else ...[
+              if (showIcon && widget.icon != null) ...[
+                Icon(widget.icon, color: widget.textColor, size: 20),
+                const SizedBox(width: 11),
+              ],
+              Text(
+                widget.text,
+                style: style.textStyle,
+                textAlign: TextAlign.center,
+              ),
             ],
-            Text(
-              widget.text,
-              style: style.textStyle,
-              textAlign: TextAlign.center,
-            ),
           ],
         ),
       ),

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tadaktak_app/core/routing/routes.dart';
 import 'package:tadaktak_app/core/styles/app_text_styles.dart';
 import 'package:tadaktak_app/core/styles/color_styles.dart';
 import 'package:tadaktak_app/presentation/component/home_card.dart';
 import 'package:tadaktak_app/presentation/component/practice_button.dart';
+import 'package:tadaktak_app/presentation/providers/auth_providers.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -17,19 +21,20 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 상단 설정 아이콘
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
                     icon: Icon(Icons.settings, color: Colors.black, size: 28),
                     onPressed: () {
-                      print('설정입니다.');
+                      ref.read(authStateProvider.notifier).signOut().then((_) {
+                        // 로그인 화면으로 이동
+                        context.go('/sign_in'); // GoRouter의 go 메서드 사용
+                      });
                     },
                   ),
                 ],
               ),
-              // 닉네임, 인사 & 프로필
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -72,13 +77,10 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 28),
-              // 로그인했을 때
               HomeCard(count: 20, isLogin: true, accuracy: 99.9, hitter: 235),
               SizedBox(height: 30),
-              // 비로그인
               // HomeCard(count: 20, isLogin: false, accuracy: 99.9, hitter: 235),
               // SizedBox(height: 26),
-              // 연습모드 카드 박스
               Expanded(
                 child: Column(
                   children: [
@@ -87,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                       icon: Icons.keyboard,
                       iconSize: 24,
                       onClick: () {
-                        print('클릭함료~');
+                        context.push(Routes.longSentence);
                       },
                     ),
                   ],
